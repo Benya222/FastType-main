@@ -101,6 +101,7 @@ filterModalBtnEl.addEventListener("click", () => {
 
 noUiSlider.create(filterSliderEl, {
   start: [20, 250],
+  margin: 1,
   range: {
     min: [20],
     max: [250],

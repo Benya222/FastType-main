@@ -84,6 +84,11 @@
     color: v.getColor(primary);
   }
 
+  &__text-info p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   &__text-title {
     max-width: 265px;
     text-overflow: ellipsis;

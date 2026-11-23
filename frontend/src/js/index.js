@@ -69,7 +69,6 @@ wordsOptionsEl.addEventListener("change", (evt) => {
   }
 
   setWords();
-  typingBox.focus();
 });
 
 repeatBtnEl.addEventListener("click", setWords);
@@ -121,6 +120,7 @@ textListEl.addEventListener("click", onTextListClick);
 async function setWords() {
   const data = await fetchWordsByOptions();
   typingBox.content = data.data;
+  typingBox.focus();
 }
 
 async function setText(id) {
@@ -131,6 +131,7 @@ async function setText(id) {
   typingBox.content = formatText(data.data.text);
   titleEl.textContent = data.data.title;
   wordsEl.textContent = data.data.word_count;
+  typingBox.focus();
 }
 
 function onTextListClick(evt) {
@@ -139,7 +140,6 @@ function onTextListClick(evt) {
   }
 
   onCloseTextModal();
-  typingBox.focus();
 
   const textId = evt.target.dataset.id;
   setText(textId);
@@ -244,6 +244,7 @@ function selectOption(evt) {
     repeatBtnEl.hidden = false;
 
     typingBox.content = service.wordsContent;
+    typingBox.focus();
   } else {
     wordsOptionsEl.hidden = true;
     textOptionsEl.hidden = false;
@@ -252,14 +253,11 @@ function selectOption(evt) {
 
     if (service.textContent === null) {
       setText(1);
-      typingBox.focus();
       return;
     }
 
     typingBox.content = formatText(service.textContent);
   }
-
-  typingBox.focus();
 }
 
 function onOpenTextModal() {

@@ -6,6 +6,10 @@ export class TypingBox {
     this.contentDisplay = document.getElementById("textDisplay");
     this.userInput = document.getElementById("userInput");
 
+    this.wordsCounter = document.getElementById("wordsCounter");
+    this.typedWords = document.getElementById("typedWords");
+    this.totalWords = document.getElementById("totalWords");
+
     this.#content = "";
     this.chars = [];
 
@@ -29,6 +33,8 @@ export class TypingBox {
 
     this.reset();
 
+    this.setTotalWords();
+
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < content.length; i++) {
@@ -50,6 +56,14 @@ export class TypingBox {
 
     if (typed.length === 1) {
       this.startTime = Date.now();
+    }
+
+    if (this.#content[currentPosition + 1] === " ") {
+      if (this.typedWords.textContent) {
+        this.typedWords.textContent = Number(this.typedWords.textContent) + 1;
+      } else {
+        this.typedWords.textContent = 0;
+      }
     }
 
     if (typed.length > 0) {
@@ -125,6 +139,7 @@ export class TypingBox {
     this.spentTime = null;
 
     this.chars = [];
+    this.typedWords.textContent = 0;
   }
 
   inputFinish() {
@@ -140,11 +155,15 @@ export class TypingBox {
   enableFocusMode() {
     document.body.classList.add("focus-mode");
     document.addEventListener("click", this.handleDocumentClick);
+
+    this.wordsCounter.hidden = false;
   }
 
   disableFocusMode() {
     document.body.classList.remove("focus-mode");
     document.removeEventListener("click", this.handleDocumentClick);
+
+    this.wordsCounter.hidden = true;
   }
 
   handleDocumentClick = (evt) => {
@@ -171,5 +190,10 @@ export class TypingBox {
     speedEl.textContent = String(speed);
     accuracyEl.textContent = String(accuracy);
     scoreEl.textContent = String(score);
+  }
+
+  setTotalWords() {
+    const total = this.#content.trim().split(/\s+/).length;
+    this.totalWords.textContent = total;
   }
 }

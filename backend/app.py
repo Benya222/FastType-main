@@ -30,7 +30,7 @@ CORS(app, origins= [frontend_origin])
 
 init_db()
 
-@app.get("/api/words")
+@app.get("/words")
 def get_words():
 
     words_args = WordsArgs(
@@ -44,7 +44,7 @@ def get_words():
     return success_response(data=words)
 
 
-@app.get("/api/text")
+@app.get("/text")
 def get_public_texts():
 
     text_args = PublicTextArgs(
@@ -69,7 +69,7 @@ def get_public_texts():
     return success_response(data= texts_in_dict, meta= meta)
 
 
-@app.get("/api/text/<text_id>")
+@app.get("/text/<text_id>")
 def get_public_text(text_id):
     text = get_public_text_by_id(text_id)
 
@@ -101,5 +101,5 @@ def teardown_request(exeption=None):
     if not db.is_closed():
         db.close()        
 
-
-app.run(debug=True, port=5000)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)

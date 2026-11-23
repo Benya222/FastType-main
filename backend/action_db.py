@@ -1,4 +1,4 @@
-from models import PublicText, Word
+from models import PublicText, Word, db
 from random import sample
 
 ''' READ '''
@@ -22,6 +22,22 @@ def get_random_words(count: int, difficult: str) -> list:
     clean_words = [word.word for word in words]
     
     return sample(clean_words, k=count)
+
+
+#===============================
+# db.connect()
+
+# text_counter = 0
+
+# for data in PublicText.select():
+#     text = data.text
+#     word_count_fixed = len(text.split())
+#     PublicText.update(word_count= word_count_fixed).where(PublicText.id == data.id).execute()
+#     text_counter += 1
+#     print(text_counter)
+
+
+# db.close()
 
 
 

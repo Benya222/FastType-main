@@ -36,6 +36,18 @@ body.focus-mode::before {
     box-sizing: border-box;
   }
 
+  &__words-counter {
+    position: absolute;
+    top: -124px;
+    right: 0;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 0%;
+    color: v.getColor(primary);
+  }
+
   &__viewport {
     height: 100%;
     overflow: hidden;
